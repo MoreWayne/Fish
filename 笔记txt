@@ -1,0 +1,84 @@
+﻿JFrame 窗体
+JPanel 面板
+JButton 按钮
+JTextField 单行文本框
+JLabel 标签(显示标签，文字，图片)
+ImageIcon 图片图标(用于显示图片的路径和名称)
+
+
+
+
+
+
+	捕鱼达人 对象：
+			鱼   		public class fish{ ... }
+			大炮		public class Barrel{ ... }
+			子弹		public class bullet{ ... }
+			渔网		public class net{ ... }
+			池塘          	public class Pool{ ... }
+	池塘-->鱼-->渔网-->大炮-->子弹
+
+JAVA 中的数据类型
+ 一.基本数据类型（8中）
+ 	1.整数类型4种，byte(-128~127) short(-32768~32767) int(+-21亿) long
+ 	2.浮点数据类型2 float double
+ 	3.字符类型1种 	char
+ 	4.布尔类型1 	boolean
+ 二。引用数据类型 当一个类或者接口作为变量类型，就称为引用数据类型
+  	类： String  BufferedImage JFrame JPanel Student stu;
+  	
+  	
+  	
+ 变量名的命名规范：
+ 			1) 可以由字母，数字，下划线， $ ¥ 
+ 			2) 变量名长度无限
+ 			3)严格区分大小写
+ 			4)驼峰命名法
+JAVA中的多线程
+
+
+程序：计算机支持多任务的，每个任务可以看作一个程序
+进程：运行中的程序叫进程
+多线程：线程是进程的更小单位，在一个进程的内部，出现并发执行的现象叫做多线程
+Thread 类
+ 	1）让一个类去继承Thread类，成为一个线程
+ 	2）在类中调用run方法，该run方法是父类Thread类中的，把线程要做的事情全部在run方法中完成
+ 	3）调用start方法，启动线程
+	
+	并发执行，并不是真正意义上的同时执行，同时执行只能在现实中做到，计算机只能做到并发执行，计算机中的CPU分配时间片给不同的线程，哪一个线程拿到CPU分配的时间片，哪个线程执行，其他线程等待，CPU的分配是不可控的
+
+
+方法定义的语法
+	修饰词 方法的返回值类型 方法名（参数列表）{ 方法体 }
+
+
+数组：	将具有相同数据类型的一堆数组放在容器中存储，该容器叫做数组
+1 2  3 4 5 8 8   int[] arr=new int[7]
+3.3 7.8 9.8	double[] arr=new double[3]
+"a" "s"   String[] arr=new String[3]
+snow   snow snow  Snow[] snows=new Snow[50]
+
+
+MouseAdapter  是Java提供的一个抽象类
+使用该抽象类的两种方法
+	1.创建一个类继承MouseAdapter的子类，可以创建该子类对象，实现鼠标的监听操作
+	2.使用匿名内部类的创建方式，来实现鼠标监听的操作
+	
+
+集合
+list    ArrayList 线性集合 按照顺序一个一个的往集合中放数据，可以重复放
+Set     HashSet   特点：不能放重复的 
+Map	HashMap   <key,value>成对  1"张三"  2"李四"
+
+	
+
+
+
+
+
+
+
+
+
+
+

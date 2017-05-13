@@ -1,0 +1,24 @@
+雪花实现过程：
+1 Main 类
+	1）绘出框架frame，并设置窗体各项属性
+	2）实例化Sky类
+	3）frame对象调用 add添加 sky
+	4）sky对象调用action方法，画出雪花飘落
+2 Sky 类
+	1）在Sky 类中 定义BufferedImage类型的 背景 bg，
+	2）在Sky中添加无参的构造方法，完成对bg的赋值 ImageIO.read(new File（“图片地址”）)，添加天空图片
+	3）Sky 继承JPanel类，调用paint方法，画出背景bg，
+g.drawImage(图片对象，左上角起点,终点，右下角起点，终点，null)
+	4）在Main类中添加Sky对象
+	5)在Sky类中定义一个方法，action,目的是不断调用paint方法，不断刷新（或理解为不断画出）Sky和snow的图片
+
+
+3.Snow类
+	1） 定义BufferedImage 类型 的 img 雪花图片，并定义雪花的属性，大小，速度，位置，坐标
+	2）在构造方法中，完成对img雪花的图片赋值
+ImageIO.read（new File（“图片地址”）），调用img对象获得雪花图片的实际大小，getwidth() getheight(),并初始化，xy的坐标
+	3）Snow类继承Thread类，调用run方法
+	while循环 使雪花一直下落 即改变y的值 y++，x不变,并线程休眠60ms
+	4)判断雪花会落出窗体,在while循环内，判断当y值大于窗体高度时，重新给y赋值，重新定义x的位置，重新定义速度Random
+	5）在Sky类中用数组定义多个雪花，Snow[]类型，并在Sky类中用for循环给snows[]赋值。在Sky类中for循环画出多个雪花。在构造方法中for循环中开启线程 
+	

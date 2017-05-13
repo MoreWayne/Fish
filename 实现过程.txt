@@ -1,0 +1,57 @@
+捕鱼达人 实现过程
+
+1.Main类
+	1)绘出框架frame，并设置窗体大小，窗体位置，窗体不可改变，关闭窗体 关闭虚拟机，窗体可见
+	2）实例化Pool类
+	3）frame对象 .add(p) 
+
+
+
+
+
+
+
+2. 背景  Pool
+
+
+	1)在池塘类中定义 bg为BufferedImgage类型
+	2)在Pool添加一个构造方法，在构造方法中完成对bg 的赋值 bg=ImageIO.read(new Field("图片路径"))
+	3）Pool 继承JPanel类，调用paint，画出图片，paint（Graphics g）g.drawImage(图片对象，左上角起点,终点，右下角起点，终点，null)
+	4)在Main类中创建池塘对象pool ，并添加到窗体中，frame.add(p);
+
+3.鱼 Fish
+
+	1)定义BufferedImage img 表示Fish，并定义鱼的属性，大小，种类，位置，速度，等等
+	2）在Fish的构造方法中，给img赋值图片地址，img=ImageIO.read(new File("图片地址"))，捕获图片地址异常
+	3）在Pool类中，添加一个特征FIsh f
+	4）在Pool 类的构造方法中，创建一条鱼，并对f赋值
+	5）在Pool类中paint方法中使用画笔g将鱼画在池塘中
+
+
+	3.实现一条鱼的移动
+	4.实现鱼移动
+	5.
+	12.
+	   1）渔网跟着鼠标移动
+	   2）渔网的显示功能		
+	   3）渔网的隐藏功能
+	   4）渔网的捕鱼功能
+	13
+	14.翻腾的效果 （思路1.读取两张翻腾的图片2.把翻腾的图片赋值给img）
+	15.面向对象设计大炮
+	17.设计金币效果  将6个0金币显示在左下角的位置，捕鱼后将金币对应显示鱼的条数
+	18.    	golds 0 0 0 0 0 0 
+		count 1050
+			charAt(0)--> 1
+			charAt(1)--> 1
+			charAt(0)--> 1
+			charAt(0)--> 1
+	
+
+	
+
+
+
+
+
+

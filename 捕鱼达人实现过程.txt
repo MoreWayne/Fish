@@ -1,0 +1,108 @@
+捕鱼达人 实现过程
+
+1.Main类
+	1)绘出框架frame，并设置窗体大小，窗体位置，窗体不可改变，关闭窗体 关闭虚拟机，窗体可见
+	2）实例化Pool类
+	3）frame对象 .add(p) 
+
+
+
+
+
+
+
+2. 背景  Pool
+
+
+	1)在池塘类中定义 bg为BufferedImgage类型 背景图片，定义Fish类型的数组 fishes 
+	2)在Pool添加一个构造方法，在构造方法中完成对bg 的赋值 bg=ImageIO.read(new Field("图片路径"))，
+	3在Pool类的构造方法中，定义Fish类型的数组大小，并用for循环赋值，fisher[i]=new Fish();  并循环开启线程fishes[i].start();
+
+	4）Pool 继承JPanel类，调用paint，画出图片，paint（Graphics g）g.drawImage(图片对象，左上角起点,终点，右下角起点，终点，null)
+	5)Pool类的paint的方法中，用画笔g循环画出fishes[i]数组中的多条鱼
+g.drawImage(图片对象fishes[i].fish,fishes[i].x,fish[i].y,fish[i].width,fish[i].height.null)
+	4)在Main类中创建池塘对象pool ，并添加到窗体中，frame.add(p);
+
+
+3.鱼 Fish
+
+	1)定义BufferedImage img 表示Fish，并定义鱼的属性，大小width,height，种类，位置x,y，速度step，等等
+	2）在Fish的构造方法中，给img赋值图片地址，img=ImageIO.read(new File("图片地址"))，并获取图片的实际大小，width=fish.getWidth();
+	3)在Fish的构造方法中，利用随机类Random赋值，根据进入池塘的方向赋值，以下默认从右到左，以下是第一次出现时，x,y,step各项数值的定义 x=窗体大小，y=r.nextInt(10)+1;
+	4）Fish 继承了Thread类，调用run方法，从池塘游出去时，再次循环进入
+所以利用while（true）死循环，在死循环中，每次进入池塘的速度不同。在循环中加if 条件（x<=-width）来判断是否游出池塘，如果条件成立，重新给y,x,step赋值
+	5）不同种鱼一起游，并且每一种鱼的速度不同，同一种鱼每次出现的速度也不同
+		1.在Fish中，把无参的构造方法，改为有参的（String type），img=ImageIO.read(enw Fiel("动态type"))，即不同种鱼的第一张图片  "fish0"+type+"_00"
+		2.在Pool的构造方法中，先用for循环先给0到8条鱼赋值和开启线程，在单独的给fishes[09]和fishes[10]赋值，开启线程
+	6）在Fish类中，定义BufferedImage类型的数组images[]，，在有参构造方法中，给images=new BufferedImages[10],大小为10。用for循环赋值读入图片 images[i]=ImagesIO.read(new File("imgaes/"+type+"_0")) 
+
+
+	7)动画效果 定义BufferedImage类型的数组images，在Fish的构造方法中，定义数组大小，用循环的方法读10张图片放到数组里面，在线程里，定义一个变量index=0，从数组中取图片给img 赋第一个值 img=image[i] i到10的时候,重新给index赋值为0
+
+4.Net 类
+	1）创建渔网类，定义属性，BufferedImage net,大小，位置，
+	2)在构造方法中，给net图片赋值，ImageIO读取，获取图片的实际高度，宽度，x,y坐标
+	3）在Pool类中，定义对象 Net net；并在构造方法中给对象赋值 net=New Net();并在paint方法中画出
+	4）在Net类中定义moveTo方法，用于获取鼠标的坐标x,y
+	5）功能：让渔网随着鼠标的移动而移动
+		1.在Pool类的action方法中，创建一个MouseAdapter的对象 mouse，并用匿名内部类的方式调用MouseAdapter中的方法，
+		(1)mouseEnter（MouseEvent e），该方法目的为：判断鼠标是否移出池塘，给isShow赋值为true
+		(2)mouseExited（MouseEvent e），该方法目的为：判断鼠标是否移入池塘，给isShow赋值为false
+		(3)mouseMoved（MouseEvent e）,  渔网随着鼠标的移动而移动,通过形参e调用获得鼠标x,y的坐标。最后，通过Net 对象net调用Net类中的moveTo方法，赋值给渔网的x,y坐标
+		(4)mousePressed（MouseEvent e）
+
+
+	6）实现鼠标移出池塘，渔网消失，鼠标移入池塘，渔网显示。
+		1.在Net类中，新增渔网属性isShow用于表示鼠标移出池塘为false，移入池塘为false
+		2.在Pool类的paint方法中，对画出渔网的语句进行判断，判断条件为net.isShow
+如果为真，画出渔网，为假不画
+	7)渔网点击捕鱼时，鱼消失从池塘右边重新出现，并且在左上角显计分板
+		1.在Pool类中定义catchFish（）方法，用for循环遍历BufferedImage类型的数组fishes，并把数组的每个值赋值给Fish类型的 fish，用if判断是否被捕到（渔网是否捕到鱼，net.IsCanCatchFish），如果被捕到，给fish的属性isLive赋值为false，并定义Pool类的属性，count，用于计算捕鱼的个数
+		2.在Net类中，定义isCanCatchFish(Fish f)方法，x,y表示鼠标的坐标，即渔网的坐标，定义dx=x-f.x  ,dy= y - f.y 。用于判断鼠标是否捕到鱼，即鼠标坐标与鱼的坐标值dx >=0 且小于宽度  dy>=0且小于高度 
+	8)重构Fish类     增加goOut(){} 方法用于判断 ，鱼被捕到后，重新随机进入池塘
+			增加move（）{}方法，用于鱼游出池塘后重新随机进入
+			增加turnOver（）{}方法，用于表现捕到鱼之后，出现鱼的翻腾动作
+
+
+5.Barrel类
+	1）在Pool类中构建计分板bar ，在Pool的构造方法中读取图片赋值给bar，在paint方法中画出bar
+	2)新建Barrel类，表示炮台，在Pool中 新建Barrel的对象 barrel ，并在Pool的构造方法中给barrel对象赋值 new Barrel（）；在paint方法中画出炮台
+	实现动态计分板，
+		1。在Pool类中定义BufferedImage类型的数组golds，并在构造方法中for循环赋值，初始赋值为图片0
+		2.在paint方法中，for循环画出六张图片0，每张图片的x坐标递增
+		3.在catchFish中，if判断内，将int类型的count转换为String类型的，String strCount=count+""
+然后for循环，将获取strCount中 指定位置的字符 所对应的图片赋值给 golds数组,
+
+
+
+
+
+
+
+
+6.Bullet类
+	1.创建Bullet类，属性：图片，坐标，大小，弧度，构造方法里面初始化图片，高宽
+	2.在Pool类，action方法，mousePressed，新建Bullet对象，并赋值，给bullet的roate属性赋值f.炮台的中心坐标分别赋值给bullet的x,y坐标
+	3.在Pool类定义ArrayList<Bullet>集合泛型，用于子弹的弹夹
+	4.在paint方法中，用for循环，给集合赋值，定义Graphics2D 类型的d2，d2.roate画出弧度，drawImage画出子弹
+	5.在Bulletl类继承Thread类，定义run方法，用于开启子弹的线程
+	6.在Bullet类中定义move方法，实现子弹的移动
+	7.定义hint方法，将pool中的鱼fishes赋值给 新的数组 fs[]  ，然后用for循环，遍历数组fs的每一条鱼判断是否被子弹击中，重点为判断条件，判断为真时，
+		（1）鱼死亡，f.isLive 为false，
+		（2）将当前子弹从bullets集合中去除，
+		（3）停止子弹线程，即 Bullet的属性 isMove赋值false
+		 (4)Pool中的count自增、
+		（5）调用pool中的printScore方法
+	8.在pool中定义一个printScore方法，将原来catchFish（）方法中的for循环，剪切到新的printScore方法
+
+
+
+
+
+
+
+
+
+
+
+
